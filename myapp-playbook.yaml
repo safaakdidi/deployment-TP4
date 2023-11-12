@@ -3,11 +3,23 @@
   gather_facts: false
   tasks:
     - name: Apply Deployment
-      command: kubectl apply -f myapp-deployment.yaml
-      args:
-        chdir: C://Users//PAVILION//Desktop//gl5//devops//Springboot with Docker
-
+      k8s:
+        state: present
+        definition: |
+          {{ lookup('file', 'myapp-deployment.yaml')}}
+      register: deployment_result
+    
     - name: Apply Service
-      command: kubectl apply -f myapp-loadbalancer-service.yaml
-      args:
-        chdir: C://Users//PAVILION//Desktop//gl5//devops//Springboot with Docker
+      k8s:
+        state: present
+        definition: |
+          {{ lookup('file', 'myapp-loadbalancer-service.yaml')}}
+      register: service_result
+
+    - name: Display Deployment Result
+      debug:
+        var: deployment_result
+
+    - name: Display Service Result
+      debug:
+        var: Sevice_result
