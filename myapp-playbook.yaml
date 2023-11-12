@@ -1,0 +1,13 @@
+- name: Deploy myapp to Kubernetes
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Apply Deployment
+      command: kubectl apply -f myapp-deployment.yaml
+      args:
+        chdir: C://Users//PAVILION//Desktop//gl5//devops//Springboot with Docker
+
+    - name: Apply Service
+      command: kubectl apply -f myapp-loadbalancer-service.yaml
+      args:
+        chdir: C://Users//PAVILION//Desktop//gl5//devops//Springboot with Docker
